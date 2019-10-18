@@ -89,6 +89,7 @@ public class Main {
 					case 1:
 						Salesmodule s = new Salesmodule();
 						boolean isValid1 = true;
+						int temp;
 						System.out.println("Enter the Item Code to fetch:");
 						fcode = sc.nextInt();
 						do{
@@ -97,7 +98,7 @@ public class Main {
 							for(Stockmodule k: stocks) {
 								if(k.getCode() == fcode) {
 									fname = k.getName();
-
+									temp = k.getQuantity();
 									try {
 
 										if(fquantity <= k.getQuantity()) {
@@ -108,6 +109,8 @@ public class Main {
 											s.setFquantity(fquantity);
 											s.setTcost(tcost);
 											Invoice.add(s);
+											temp = temp - fquantity;
+											k.setQuantity(temp);
 
 										}else {
 											throw new ValidException("Quantity Exceeds the limit!");
